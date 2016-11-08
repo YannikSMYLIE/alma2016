@@ -1,0 +1,5 @@
+﻿  1Programmieraufgabe.cpp
+c:\users\yannik\documents\visual studio 2015\projects\1programmieraufgabe\1programmieraufgabe\1programmieraufgabe.cpp(88): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+c:\users\yannik\documents\visual studio 2015\projects\1programmieraufgabe\1programmieraufgabe\1programmieraufgabe.cpp(100): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+c:\users\yannik\documents\visual studio 2015\projects\1programmieraufgabe\1programmieraufgabe\1programmieraufgabe.cpp(113): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+  1Programmieraufgabe.vcxproj -> C:\Users\Yannik\Documents\Visual Studio 2015\Projects\1Programmieraufgabe\Debug\1Programmieraufgabe.exe
