@@ -19,6 +19,7 @@ public:
 	// Unsere beiden neuen Operationen
 	bool operator==(const LargeInt &) const;
 	bool operator!=(const LargeInt &) const;
+	void shiftRight();
 
 	void print()
 	{

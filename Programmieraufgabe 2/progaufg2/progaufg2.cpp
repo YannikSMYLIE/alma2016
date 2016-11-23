@@ -99,35 +99,56 @@ const LargeInt & LargeInt::operator+=(const LargeInt & arg)   // addition
 	return *this;
 }
 
+// Shift Funktionen
+void LargeInt::shiftRight()
+{
+	_v.push_back(0);
+	for (int i = _v.size() - 2; i >= 0; i--)
+	{
+		_v[i + 1] = _v[i];
+	}
+	_v[0] = 0;
+}
+
 /* Der Operator wird eingeführt */
 LargeInt LargeInt::operator*(const LargeInt & arg) const {
-	// Wir "klonen" die erste Zahl links vom * da wir eine neue Zahl zurück geben wollen und die alten unverändert lassen wollen.
-	LargeInt result(*this);
-	// Wir multiplizieren die Zahl rechts vom * mit der geklonten
-	result *= arg;
+	LargeInt result(0);
+	std::vector<LargeInt> summanden(_v.size() + arg._v.size() - 1, 0);
+	
+	int fL, fR, sL, sR;
+	for (int i = 0; i < _v.size() + arg._v.size() - 1; i++)
+	{
+		// Grenzen fuer erste Zahl ermitteln
+		fL = (_v.size() - 1) - i;
+		fR = fL + arg._v.size() - 1;
+		if (fL < 0)
+			fL = 0;
+		if (fR >= _v.size())
+			fR = _v.size() - 1;
+
+		// Grenzen fuer zweite Zahl ermitteln
+		sL = (arg._v.size() - 1) - i;
+		sR = sL + _v.size() - 1;
+		if (sL < 0)
+			sL = 0;
+		if (sR >= arg._v.size())
+			sR = arg._v.size() - 1;
+
+		// Zahlen addieren
+		for (int j = 0; fL + j <= fR; j++)
+		{
+			summanden[i] += LargeInt(_v[fL + j] * arg._v[sR - j]);
+		}
+	}
+	// Summanden zur Summe addieren
+	for (int i = 0; i < summanden.size() - 1; i++)
+	{
+		result += summanden[i];
+		result.shiftRight();
+	}
+	result += summanden[summanden.size() - 1];
 	// Wir geben die Zahl zurück
 	return result;
-}
-const LargeInt & LargeInt::operator*=(const LargeInt & arg) {
-	/* Hier möchten wir eine Zahl arg mal multiplizieren.
-	Die Idee ist den aktuellen Wert einfach arg mal zu addieren.
-	Das geht bestimmt schöner, aber das ist die einfachse Idee.
-	Achtung! Ab C(12) dauert die Berechnung echt lange, daher vielleicht doch noch was ändern. */
-	// Alten Wert speichern, da sich die Zahl ja bei der Addition ändert
-	LargeInt oldValue(*this);
-	// Zählervariable definieren
-	LargeInt count(1);
-
-	/* Solange unsere Zählervariable nicht unserem arg (also so oft wie wir oldValue addieren wollen) entspricht, müssen wir weiter addieren. */
-	while (count != arg)
-	{
-		// Auf die Zahl die alte Zahl addieren
-		*this += oldValue;
-		// Zählervariable um eins erhöhen.
-		count += 1;
-	}
-	// Zahl "zurück" geben.
-	return *this;
 }
 
 
@@ -144,12 +165,7 @@ LargeInt calcCRek(int n)
 	LargeInt summe(0);
 	for (int k = 0; k < n; k++) // < da wir bis n-1 summieren!
 	{
-		LargeInt summand = calcCRek(k); // C(k) berechnen
-		summand *= calcCRek(n - k - 1); // C(n-k) multiplizieren
-		summe += summand; // summand zur Summe addieren
-		/* Weniger übersichtlicher aber voll cool: In einem Schritt:
-			summe += calcC(k) * calcC(n - k);
-		*/
+		summe += calcCRek(k) * calcCRek(n - k - 1);
 	}
 	return summe;
 }
@@ -184,8 +200,11 @@ int main()
 {
 	// LargeInt hat eine zusätzliche Funktion print() bekommen um die Zahlen auszugeben. Wie geht das besser?
 
+
+	
 	std::cout << "Bitte verschiedene Zahlen eingeben um Programm zu testen, eine negative Zahl beendet das Programm" << std::endl;
 	int n = get_input();
+
 	while (n >= 0)
 	{
 		LargeInt ergebnisIt = clacCIt(n);

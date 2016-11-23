@@ -1,3 +1,7 @@
 ﻿  progaufg2.cpp
 e:\cloud\unikram\2016 wintersemester\alma 1\programmieraufgabe 2\progaufg2\progaufg2.cpp(61): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+e:\cloud\unikram\2016 wintersemester\alma 1\programmieraufgabe 2\progaufg2\progaufg2.cpp(119): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+e:\cloud\unikram\2016 wintersemester\alma 1\programmieraufgabe 2\progaufg2\progaufg2.cpp(126): warning C4018: ">=": Konflikt zwischen "signed" und "unsigned"
+e:\cloud\unikram\2016 wintersemester\alma 1\programmieraufgabe 2\progaufg2\progaufg2.cpp(134): warning C4018: ">=": Konflikt zwischen "signed" und "unsigned"
+e:\cloud\unikram\2016 wintersemester\alma 1\programmieraufgabe 2\progaufg2\progaufg2.cpp(144): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
   progaufg2.vcxproj -> E:\Cloud\Unikram\2016 Wintersemester\AlMa 1\Programmieraufgabe 2\Debug\progaufg2.exe
